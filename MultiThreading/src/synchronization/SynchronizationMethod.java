@@ -14,9 +14,11 @@ public class SynchronizationMethod {
 		TimeZone2 tz1=new TimeZone2();
 		TimeZone2 tz2=new TimeZone2();
 		Thread t1=new Thread(new TestSync2(tz1,"Bangalore"));
+		Thread t3=new Thread(new TestSync3(tz1,"Bangalore"));
 		Thread t2=new Thread(new TestSync2(tz2,"Chennai"));
 		t1.start();
 		t2.start();
+		t3.start();
 		//Regular output i.e. once city followed by another
 	}
 
@@ -43,9 +45,27 @@ class TestSync2 implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		t2.getState(place);
 		
 	}	
+}
+
+class TestSync3 implements Runnable{
+	
+	TimeZone2 t3;
+	String place;
+	
+	
+	public TestSync3(TimeZone2 t3, String place) {
+		super();
+		this.t3 = t3;
+		this.place = place;
+	}
+
+	@Override
+	public void run() {
+		System.out.println("modifying by "+Thread.currentThread().getName());
+		t3.getState(place);
+	}
 }
 
 class TimeZone2 {
@@ -55,7 +75,7 @@ class TimeZone2 {
 	public static synchronized void getDateTimeInfo(String place) throws InterruptedException {
 		
 		for(int i=0;i<5;i++) {
-			System.out.println(i+">> Place: "+place);
+			System.out.println(i+">> Place: "+place+" printed by "+Thread.currentThread().getName());
 			Thread.sleep(2000);
 			System.out.println("Time: "+new Date());
 			
