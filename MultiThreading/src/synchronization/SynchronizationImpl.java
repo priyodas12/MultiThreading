@@ -12,6 +12,7 @@ import java.util.Date;
 public class SynchronizationImpl {
 	
 	public static void main(String[] args) {
+		//only one object and 4 threads are trying to access the same object
 		TimeZone t=new TimeZone();
 		Thread t1=new Thread(new TestSync(t,"Bangalore"));
 		Thread t2=new Thread(new TestSync(t,"Chennai"));
