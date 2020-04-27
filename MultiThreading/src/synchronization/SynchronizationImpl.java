@@ -15,8 +15,12 @@ public class SynchronizationImpl {
 		TimeZone t=new TimeZone();
 		Thread t1=new Thread(new TestSync(t,"Bangalore"));
 		Thread t2=new Thread(new TestSync(t,"Chennai"));
+		Thread t3=new Thread(new TestSync(t,"Dubai"));
+		Thread t4=new Thread(new TestSync(t,"NYC"));
 		t1.start();
 		t2.start();
+		t3.start();
+		t4.start();
 	}
 
 }
@@ -49,8 +53,8 @@ class TimeZone {
 	
 	private String place;
 	
-	public  void getDateTimeInfo(String place) throws InterruptedException {
-		for(int i=0;i<10;i++) {
+	public synchronized void getDateTimeInfo(String place) throws InterruptedException {
+		for(int i=0;i<5;i++) {
 			System.out.println(i+">> Place: "+place);
 			Thread.sleep(2000);
 			System.out.println("Time: "+new Date());
