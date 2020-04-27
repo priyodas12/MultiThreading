@@ -3,7 +3,9 @@ package synchronization;
 import java.util.Date;
 
 /*
- * Synchronized Method:Class Level lock(static synchronized method)
+ * Synchronized Method:Class Level lock(static synchronized method).
+ * 
+ * 
  */
 public class SynchronizationMethod {
 	
@@ -41,12 +43,14 @@ class TestSync2 implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		t2.getState(place);
+		
 	}	
 }
 
 class TimeZone2 {
 	
-	private String place;
+	private  String place;
 	//Class Level lock(Class class object lock)
 	public static synchronized void getDateTimeInfo(String place) throws InterruptedException {
 		
@@ -54,6 +58,19 @@ class TimeZone2 {
 			System.out.println(i+">> Place: "+place);
 			Thread.sleep(2000);
 			System.out.println("Time: "+new Date());
+			
+		}
+	}
+	
+	public static void getState(String place) {
+		if(place.equals("Bangalore")) {
+			System.out.println("Karnataka");
+		}
+		else if(place.equals("Chennai")) {
+			System.out.println("Tamilnadu");
+		}
+		else {
+			System.out.println("Unknown");
 		}
 	}
 }
